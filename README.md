@@ -1,549 +1,226 @@
-# Handmade Flowers E-Commerce Website
+# 🌸 Blooms&Looms – Handmade Flowers E-Commerce Website
 
-A complete, production-ready MERN (MongoDB, Express, React, Node.js) e-commerce website for a handmade artificial pipe cleaner flowers business.
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Setup Guide](#setup-guide)
-- [API Documentation](#api-documentation)
-- [Admin Features](#admin-features)
+A full-stack **MERN Stack E-Commerce Website** designed for a handmade artificial pipe-cleaner flower business. The platform allows customers to explore handmade products, place orders, request customized designs, and track their orders through a simple and elegant shopping experience.
 
 ---
 
 ## ✨ Features
 
-### Customer Features
-- ✓ Browse products by category
-- ✓ View detailed product information
-- ✓ Manual UPI QR code payment system
-- ✓ Payment screenshot upload verification
-- ✓ Custom product order requests
-- ✓ Track order status in real-time
-- ✓ Responsive design (mobile-friendly)
-- ✓ Pastel color theme with minimal design
+### 🛍️ Customer Features
+- Browse handmade flower products by category.
+- View detailed product information.
+- Place orders through an online checkout system.
+- UPI QR code-based payment workflow.
+- Upload payment screenshots for verification.
+- Submit customized flower order requests.
+- Track order status using transaction details.
+- Responsive and user-friendly interface.
 
-### Admin Features
-- ✓ Secure admin login/registration
-- ✓ Dashboard with real-time statistics
-- ✓ Add, edit, delete products
-- ✓ Manage customer orders
-- ✓ Approve/reject orders with payment verification
-- ✓ View payment screenshots
-- ✓ Manage custom orders
-- ✓ Revenue tracking
+### 🔐 Admin Features
+- Admin authentication.
+- Interactive dashboard with order and product statistics.
+- Add, update, and delete products.
+- Manage customer orders.
+- Verify payment screenshots.
+- Approve or reject customer orders.
+- Manage customized order requests.
+- Track revenue and order statistics.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- **React 18** - UI framework
-- **React Router v6** - Navigation
-- **Axios** - HTTP client
-- **CSS3** - Styling (Pastel design)
+| Technology | Purpose |
+|---|---|
+| MongoDB | Database |
+| Express.js | Backend Framework |
+| React.js | Frontend Library |
+| Node.js | Backend Runtime |
+| Mongoose | MongoDB Object Modeling |
+| JWT | Authentication |
+| Bcrypt | Password Hashing |
+| Axios | API Communication |
+| CSS3 | Styling |
+| Cloudinary | Image Management |
+| Multer | File Upload Handling |
 
-### Backend
-- **Node.js** - Runtime
-- **Express.js** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - ODM
-- **JWT** - Authentication
-- **Bcrypt** - Password hashing
-- **Cloudinary** - Image uploads
-- **Multer** - File handling
+**Architecture:** MERN (MongoDB, Express.js, React.js, Node.js)
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
-```
-handmade-flowers/
-├── client/                          # Frontend (React)
+```text
+Handmade-flowers/
+│
+├── client/                  # React Frontend
 │   ├── public/
-│   │   └── index.html
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Header.js
-│   │   │   ├── Footer.js
-│   │   │   ├── ProductCard.js
-│   │   │   ├── LoadingSpinner.js
-│   │   │   └── ProtectedRoute.js
 │   │   ├── pages/
-│   │   │   ├── Home.js
-│   │   │   ├── Products.js
-│   │   │   ├── ProductDetails.js
-│   │   │   ├── Checkout.js
-│   │   │   ├── CustomOrder.js
-│   │   │   ├── About.js
-│   │   │   ├── Contact.js
-│   │   │   ├── OrderStatus.js
-│   │   │   ├── AdminLogin.js
-│   │   │   ├── AdminDashboard.js
-│   │   │   ├── ManageProducts.js
-│   │   │   └── ManageOrders.js
 │   │   ├── services/
-│   │   │   └── api.js              # API calls
 │   │   ├── styles/
-│   │   │   └── global.css
 │   │   ├── App.js
 │   │   └── index.js
-│   ├── .env.example
-│   └── package.json
+│   ├── package.json
+│   └── .env.example
 │
-└── server/                          # Backend (Node.js)
-    ├── config/
-    │   ├── db.js                    # MongoDB connection
-    │   └── cloudinary.js            # Image upload config
-    ├── models/
-    │   ├── Product.js
-    │   ├── Order.js
-    │   ├── CustomOrder.js
-    │   └── Admin.js
-    ├── controllers/
-    │   ├── productController.js
-    │   ├── orderController.js
-    │   ├── customOrderController.js
-    │   └── adminController.js
-    ├── routes/
-    │   ├── productRoutes.js
-    │   ├── orderRoutes.js
-    │   ├── customOrderRoutes.js
-    │   └── adminRoutes.js
-    ├── middleware/
-    │   ├── auth.js                  # JWT verification
-    │   └── errorHandler.js
-    ├── .env.example
-    ├── server.js
-    └── package.json
+├── server/                  # Node.js & Express Backend
+│   ├── config/
+│   ├── models/
+│   ├── controllers/
+│   ├── routes/
+│   ├── middleware/
+│   ├── server.js
+│   ├── package.json
+│   └── .env.example
+│
+└── README.md
 ```
 
 ---
 
-## 🚀 Setup Guide
+## 🚀 Getting Started
+
+Follow these steps to run the project locally.
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-- MongoDB Atlas account (free)
-- Cloudinary account (free)
+
+- Node.js and npm
+- MongoDB Atlas account or local MongoDB installation
+- Cloudinary account (if using Cloudinary image uploads)
 - Git
 
-### Step 1: Clone the Repository
-```bash
-cd handmade-flowers
-```
-
-### Step 2: Setup MongoDB Atlas
-
-1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Sign up for a free account
-3. Create a new cluster (free tier available)
-4. Click "Connect" → "Connect your application"
-5. Copy the connection string
-6. Replace `username` and `password` with your credentials
-7. Keep this connection string safe
-
-**Connection String Format:**
-```
-mongodb+srv://username:password@cluster.mongodb.net/handmade-flowers?retryWrites=true&w=majority
-```
-
-### Step 3: Setup Cloudinary
-
-1. Go to [Cloudinary](https://cloudinary.com)
-2. Sign up for a free account
-3. Go to Dashboard
-4. Copy your:
-   - Cloud Name
-   - API Key
-   - API Secret
-
-### Step 4: Backend Setup
+### 1. Clone the Repository
 
 ```bash
-# Navigate to server directory
+git clone https://github.com/indiraparadkar675/BloomsLooms-Handmade-Flowers-Ecomm-Website.git
+```
+
+```bash
+cd BloomsLooms-Handmade-Flowers-Ecomm-Website
+```
+
+### 2. Setup Backend
+
+```bash
 cd server
-
-# Install dependencies
 npm install
-
-# Create .env file
-copy .env.example .env
-
-# Edit .env file with your credentials:
-# MONGODB_URI=your_mongodb_connection_string
-# JWT_SECRET=your_random_secret_key
-# CLOUDINARY_CLOUD_NAME=your_cloud_name
-# CLOUDINARY_API_KEY=your_api_key
-# CLOUDINARY_API_SECRET=your_api_secret
-# FRONTEND_URL=http://localhost:3000
-
-# Start the backend server
-npm start
-# or for development with auto-reload:
-npm run dev
 ```
 
-The server will start on: `http://localhost:5000`
+Create a `.env` file inside the server folder and configure the required environment variables:
 
-**API Health Check:**
-```
-GET http://localhost:5000/api/health
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+FRONTEND_URL=http://localhost:3000
 ```
 
-### Step 5: Frontend Setup
+Add Cloudinary credentials if your backend uses Cloudinary:
+
+```env
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+Start the backend:
 
 ```bash
-# Navigate to client directory
+npm start
+```
+
+Backend URL: `http://localhost:5000`
+
+### 3. Setup Frontend
+
+Open another terminal:
+
+```bash
 cd client
-
-# Install dependencies
 npm install
+```
 
-# Create .env file
-copy .env.example .env
+Create a `.env` file inside the client folder:
 
-# Edit .env file:
-# REACT_APP_API_URL=http://localhost:5000/api
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
 
-# Start the frontend
+Start the React application:
+
+```bash
 npm start
 ```
 
-The app will open on: `http://localhost:3000`
-
-### Step 6: Create Admin Account
-
-1. Go to http://localhost:3000/admin/login
-2. Click "Register here"
-3. Enter your admin credentials
-4. Login with your credentials
-
-**Note:** In production, disable registration and create admins via database only.
+Frontend URL: `http://localhost:3000`
 
 ---
 
-## 📊 API Documentation
+## 🔄 How It Works
 
-### Base URL
-```
-http://localhost:5000/api
-```
+### Customer Workflow
+1. Explore available handmade flower products.
+2. Select a product or request a customized design.
+3. Enter delivery details during checkout.
+4. Complete payment using the displayed UPI QR code.
+5. Submit the transaction ID and payment screenshot.
+6. Track the order status.
 
-### Products API
-
-**Get All Products**
-```
-GET /products
-```
-
-**Get Product by ID**
-```
-GET /products/:id
-```
-
-**Get Products by Category**
-```
-GET /products/category/:category
-```
-Categories: `keychain`, `fridge-magnet`, `hair-clip`, `flower-pot`, `bouquet`
-
-**Create Product (Admin)**
-```
-POST /products
-Headers: Authorization: Bearer {token}
-Body: FormData
-  - name: string
-  - price: number
-  - description: string
-  - category: string
-  - image: file
-```
-
-**Update Product (Admin)**
-```
-PUT /products/:id
-Headers: Authorization: Bearer {token}
-Body: FormData (same as create)
-```
-
-**Delete Product (Admin)**
-```
-DELETE /products/:id
-Headers: Authorization: Bearer {token}
-```
-
-### Orders API
-
-**Create Order**
-```
-POST /orders
-Body: FormData
-  - productId: string
-  - customerName: string
-  - phone: string (10 digits)
-  - address: string
-  - amount: number
-  - transactionId: string
-  - paymentScreenshot: file
-```
-
-**Get Order by Transaction ID**
-```
-GET /orders/status/:transactionId
-```
-
-**Get All Orders (Admin)**
-```
-GET /orders
-Headers: Authorization: Bearer {token}
-```
-
-**Get Order by ID (Admin)**
-```
-GET /orders/:id
-Headers: Authorization: Bearer {token}
-```
-
-**Approve Order (Admin)**
-```
-PATCH /orders/:id/approve
-Headers: Authorization: Bearer {token}
-```
-
-**Reject Order (Admin)**
-```
-PATCH /orders/:id/reject
-Headers: Authorization: Bearer {token}
-Body: { reason: string }
-```
-
-### Custom Orders API
-
-**Create Custom Order**
-```
-POST /custom-orders
-Body:
-{
-  "name": string,
-  "phone": string,
-  "address": string,
-  "productType": string,
-  "color": string,
-  "customText": string (optional),
-  "quantity": number,
-  "occasion": string
-}
-```
-
-**Get All Custom Orders (Admin)**
-```
-GET /custom-orders
-Headers: Authorization: Bearer {token}
-```
-
-**Update Custom Order (Admin)**
-```
-PATCH /custom-orders/:id
-Headers: Authorization: Bearer {token}
-Body: { status: string }
-```
-
-### Admin API
-
-**Register Admin**
-```
-POST /admin/register
-Body:
-{
-  "username": string,
-  "password": string
-}
-```
-
-**Login Admin**
-```
-POST /admin/login
-Body:
-{
-  "username": string,
-  "password": string
-}
-Response: { token: string, data: {...} }
-```
-
-**Get Admin Profile**
-```
-GET /admin/profile
-Headers: Authorization: Bearer {token}
-```
+### Admin Workflow
+1. Log in to the admin dashboard.
+2. Manage products and inventory.
+3. View incoming customer orders.
+4. Verify payment screenshots and transaction details.
+5. Approve or reject orders.
+6. Manage customized order requests.
 
 ---
 
-## 🔐 Admin Features
+## 🎨 UI & Design
 
-### Admin Dashboard
-- View total products, orders, and revenue
-- See pending and approved orders count
-- Quick access to all management tools
-
-### Product Management
-- Add new products with images
-- Edit existing product details
-- Delete products
-- Manage inventory
-
-### Order Management
-- View all customer orders
-- See payment screenshots
-- Approve verified payments
-- Reject with reason
-- Track order status
-
-### Custom Orders
-- View custom order requests
-- Update order status
-- Communicate with customers
+- Soft pastel-inspired color palette.
+- Clean and minimal interface.
+- Responsive layouts for different screen sizes.
+- User-friendly navigation.
+- Smooth hover effects and transitions.
 
 ---
 
-## 🎨 Design Features
+## 🔒 Security & Configuration
 
-- **Pastel Color Palette:** Soft pinks, blues, and purples
-- **Minimal Design:** Clean, uncluttered interface
-- **Responsive Layout:** Works perfectly on mobile, tablet, and desktop
-- **Smooth Animations:** Hover effects and transitions
-- **Accessible:** Good contrast and readable fonts
+- Environment variables for sensitive configuration.
+- JWT-based authentication.
+- Password hashing using Bcrypt.
+- Protected admin routes.
+- Payment verification workflow.
 
----
-
-## 🔄 Order Flow
-
-### Customer Side
-1. Browse products
-2. Select product or create custom order
-3. Proceed to checkout
-4. Scan UPI QR code
-5. Make payment
-6. Upload payment screenshot
-7. Enter transaction ID
-8. Order submitted
-9. Check order status anytime
-
-### Admin Side
-1. Login to dashboard
-2. View pending orders
-3. Check payment screenshot
-4. Verify payment details
-5. Approve or reject order
-6. Customer sees updated status
-7. Process order fulfillment
+**Important:** Never upload `.env` files, database credentials, API secrets, or private keys to GitHub.
 
 ---
 
-## 📝 Payment System
+## 👩‍💻 Developer
 
-### UPI QR Code Flow
-1. Customer clicks "Buy Now"
-2. Checkout page shows UPI QR code
-3. Customer scans with UPI app
-4. Enters amount and pays
-5. Gets payment confirmation
-6. Takes screenshot
-7. Uploads screenshot in form
-8. Enters Transaction ID from UPI
+**Indira Paradkar**
 
-### Verification
-- Admin views screenshot
-- Checks transaction ID
-- Verifies payment amount
-- Approves if valid
-- Rejects if invalid
+B.Tech Student | Full-Stack Development Enthusiast
 
-**Current UPI ID:** `yourbusiness@upi` (update in Checkout.js)
+- GitHub: [@indiraparadkar675](https://github.com/indiraparadkar675)
+- LinkedIn: [Indira Paradkar](https://www.linkedin.com/in/indira-paradkar-93369532b/)
 
 ---
 
-## 🚢 Deployment
+## 📌 Future Enhancements
 
-### Backend Deployment (Heroku/Railway/Render)
-```bash
-# Create Procfile in server directory
-echo "web: node server.js" > Procfile
-
-# Deploy to Heroku
-heroku create your-app-name
-git push heroku main
-```
-
-### Frontend Deployment (Vercel/Netlify)
-```bash
-# Build the frontend
-npm run build
-
-# Deploy to Vercel
-vercel
-```
-
-### Environment Variables in Production
-- Keep all secrets in .env files
-- Never commit .env to git
-- Use provider's secret management
-- Update REACT_APP_API_URL to production backend URL
+- Online payment gateway integration.
+- Email and order confirmation notifications.
+- Advanced product search and filtering.
+- Customer reviews and ratings.
+- Live deployment.
 
 ---
 
-## 🐛 Troubleshooting
+⭐ If you like this project, consider giving the repository a star!
 
-### "Cannot connect to MongoDB"
-- Check MongoDB connection string
-- Verify IP whitelist in MongoDB Atlas
-- Ensure database name is correct
-
-### "Cloudinary upload fails"
-- Verify Cloudinary credentials
-- Check image file format
-- Ensure file size < 5MB
-
-### "CORS errors"
-- Check FRONTEND_URL in backend .env
-- Ensure frontend and backend URLs match
-
-### "JWT token invalid"
-- Clear localStorage
-- Re-login to admin panel
-- Check JWT_SECRET matches
-
----
-
-## 📞 Support
-
-For issues or questions:
-1. Check the API documentation
-2. Review error messages carefully
-3. Verify all environment variables
-4. Ensure all dependencies are installed
-
----
-
-## 📄 License
-
-This project is open source and available for commercial use.
-
----
-
-## 🎉 Ready to Launch!
-
-Your e-commerce website is ready. Start adding products and accepting orders!
-
-**Next Steps:**
-1. Add your UPI ID in Checkout.js
-2. Upload product images
-3. Create admin account
-4. Start accepting orders
-5. Share with customers
-
-Good luck! 🌸
+**Made with ❤️ for handmade creativity.** 🌸
