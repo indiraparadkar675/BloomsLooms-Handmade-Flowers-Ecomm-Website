@@ -100,7 +100,7 @@ const Home = () => {
               { key: 'flower-pot', name: 'Flower Pots', desc: 'Beautiful decor pieces', img: '/images/img13.jpg' },
               { key: 'hair-clip', name: 'Hair Clips', desc: 'Cute floral accessories', img: '/images/img14.jpg' },
               { key: 'keychain', name: 'Keychains', desc: 'Mini aesthetic charms', img: '/images/img15.jpg' },
-              { key: 'keychain', name: 'Keychains', desc: 'Mini aesthetic charms', img: '/images/img18.jpg' },              
+              { key: 'keychain', name: 'Bookmarks', desc: 'Aesthetic bookmark charms', img: '/images/img18.jpg' },              
               { key: 'custom', name: 'Custom', desc: 'Made just for you', img: '/images/img5.jpg' }
             ].map((item, index) => (
 

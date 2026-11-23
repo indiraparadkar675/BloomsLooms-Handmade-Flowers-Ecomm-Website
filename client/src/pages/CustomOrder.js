@@ -69,7 +69,7 @@ const CustomOrder = () => {
         <div className="custom-order-wrapper">
           <div className="custom-order-info">
             <div className="info-card">
-              <h3>🎨 Custom Design Process</h3>
+              <h3>-Custom Design Process</h3>
               <ol>
                 <li>Fill in your details</li>
                 <li>Choose product type and color</li>
@@ -80,7 +80,7 @@ const CustomOrder = () => {
             </div>
 
             <div className="info-card">
-              <h3>💡 Examples</h3>
+              <h3>-Examples</h3>
               <ul>
                 <li>Name bouquets</li>
                 <li>Date keychains</li>

@@ -24,7 +24,7 @@ const Footer = () => {
 
           {/* Instagram */}
           <a 
-            href="https://instagram.com/YOUR_USERNAME"
+            href="https://www.instagram.com/blooms_n_looms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -34,7 +34,7 @@ const Footer = () => {
 
           {/* Facebook */}
           <a 
-            href="https://facebook.com/YOUR_USERNAME"
+            href="https://www.facebook.com/bloomsnlooms/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -44,7 +44,7 @@ const Footer = () => {
 
           {/* Email */}
           <a 
-            href="mailto:bloomsnlooms@gmail.com"
+            href="bloomsnlooms@gmail.com"
             aria-label="Email"
           >
             <FiMail />

@@ -9,9 +9,12 @@ import './Products.css';
 const Products = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
+  const [sort, setSort] = useState('');
+
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loginAction, setLoginAction] = useState(null);
@@ -41,9 +44,10 @@ const Products = () => {
         response = await productAPI.getAllProducts();
       }
 
-      setProducts(response.data.data || []);
+      const data = response?.data?.data || [];
+      setProducts(data);
     } catch (error) {
-      console.error('Failed to fetch products:', error);
+      console.error('Fetch error:', error);
       setProducts([]);
     } finally {
       setLoading(false);
@@ -52,12 +56,16 @@ const Products = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    if (category) {
-      setSearchParams({ category });
-    } else {
-      setSearchParams({});
-    }
+    if (category) setSearchParams({ category });
+    else setSearchParams({});
   };
+
+  // 🔥 SAFE SORT (no breaking API)
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sort === 'priceLow') return a.price - b.price;
+    if (sort === 'priceHigh') return b.price - a.price;
+    return 0;
+  });
 
   const handleAddToCart = (product) => {
     setSelectedProduct(product);
@@ -71,54 +79,32 @@ const Products = () => {
     setLoginModalOpen(true);
   };
 
-  const handleLoginSuccess = ({ type, data }) => {
-    if (type === 'customer') {
-      if (loginAction === 'addToCart') {
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        cart.push(selectedProduct);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert(`${selectedProduct.name} added to cart!`);
-      } else if (loginAction === 'buyNow') {
-        navigate(`/product/${selectedProduct._id}`);
-      }
-    } else if (type === 'admin') {
-      navigate('/admin/dashboard');
-    }
-  };
-
   return (
     <div className="products-page">
-      {/* Login Modal */}
+
       <UnifiedLoginModal
         isOpen={loginModalOpen}
-        onClose={() => {
-          setLoginModalOpen(false);
-          setSelectedProduct(null);
-          setLoginAction(null);
-        }}
-        onLoginSuccess={handleLoginSuccess}
-        loginType="customer"
+        onClose={() => setLoginModalOpen(false)}
       />
 
       <div className="container">
-        {/* Header */}
+
         <div className="products-header">
           <h1>Our Products</h1>
-          <p>Explore our beautiful collection of handmade flowers</p>
+          <p>Explore our handmade collection</p>
         </div>
 
         <div className="products-container">
-          {/* Sidebar - Categories Filter */}
+
+          {/* FILTER */}
           <aside className="products-sidebar">
             <div className="filter-card">
-              <h3>Filter by Category</h3>
+              <h3>Filter</h3>
               <div className="filter-options">
                 {categories.map((category) => (
                   <label key={category.value} className="filter-option">
                     <input
                       type="radio"
-                      name="category"
-                      value={category.value}
                       checked={selectedCategory === category.value}
                       onChange={() => handleCategoryChange(category.value)}
                     />
@@ -129,32 +115,44 @@ const Products = () => {
             </div>
           </aside>
 
-          {/* Main Content - Products Grid */}
+          {/* MAIN */}
           <main className="products-main">
+
+            {/* TOP BAR */}
+            <div className="products-topbar">
+              <span>{products.length} Products</span>
+
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+                className="sort-select"
+              >
+                <option value="">Default</option>
+                <option value="priceLow">Price: Low → High</option>
+                <option value="priceHigh">Price: High → Low</option>
+              </select>
+            </div>
+
             {loading ? (
-              <LoadingSpinner message="Loading products..." />
-            ) : products.length > 0 ? (
-              <>
-                <div className="products-count">
-                  Showing {products.length} product
-                  {products.length !== 1 ? 's' : ''}
-                </div>
-                <div className="grid grid-3">
-                  {products.map((product) => (
-                    <ProductCard
-                      key={product._id}
-                      product={product}
-                      onAddToCart={handleAddToCart}
-                      onBuyNow={handleBuyNow}
-                    />
-                  ))}
-                </div>
-              </>
+              <LoadingSpinner message="Loading..." />
+            ) : sortedProducts.length > 0 ? (
+              <div className="grid grid-3">
+                {sortedProducts.map((product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    onAddToCart={handleAddToCart}
+                    onBuyNow={handleBuyNow}
+                  />
+                ))}
+              </div>
             ) : (
               <div className="no-products">
-                <p>No products found in this category.</p>
+                <h3>No Products Found</h3>
+                <p>Try another category</p>
               </div>
             )}
+
           </main>
         </div>
       </div>
